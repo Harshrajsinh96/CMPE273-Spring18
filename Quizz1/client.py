@@ -5,7 +5,7 @@ from ping_pb2 import Request,Response
 
 class PingClient():
     def __init__(self,host='0.0.0.0', port=3000):
-        self.channel = grpc.insecure_channel('%s:%d' %(host))
+        self.channel = grpc.insecure_channel('%s:%d' %(host,port))
         self.stub = ping_pb2_grpc.PingPongStub(self.channel)
 
     def ping(self, data):

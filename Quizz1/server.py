@@ -7,7 +7,9 @@ from concurrent import futures
 
 class PingServer(ping_pb2_grpc.PingPongServicer):
     def ping(self, request, context):
-       return ping_pb2.Response(data=' PONG ')
+        #TODO
+        print("Encode :\n", request)
+        return ping_pb2.Response(data=' PONG ')
        
 def run(host, port):
     server = grpc.server(futures.ThreadPoolExecutor(max_workers=1))
