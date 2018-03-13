@@ -1,16 +1,18 @@
 import zmq
 
-# ZeroMQ Context
+#Creating ZMQ context
 context = zmq.Context()
 
-# Define the socket using the "Context"
-sock = context.socket(zmq.REP)
-sock.bind("tcp://127.0.0.1:5678")
+#Defining the socket
+#Pull Socket
+pullSock = context.socket(zmq.PULL)
+pullSock.bind("tcp://127.0.0.1:5678")
 
-# Run a simple "Echo" server
+#Pub socket
+pubSock = context.socket(zmq.PUB)
+pubSock.bind("tcp://127.0.0.1:5613")
+
 while True:
-    message = sock.recv()
-    message = message.decode()
-    message = message[::-1]
-    sock.send_string("Echo: " + message)
-    print("[Server] Echo: " + message)
+    msg = pullSock.recv()
+    pubSock.send(msg)
+    print("[Server-Window] " + msg.decode())
