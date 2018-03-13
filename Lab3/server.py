@@ -4,6 +4,7 @@ import zmq
 context = zmq.Context()
 
 #Defining the socket
+
 #Pull Socket
 pullSock = context.socket(zmq.PULL)
 pullSock.bind("tcp://127.0.0.1:5678")
